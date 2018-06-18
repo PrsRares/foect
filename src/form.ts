@@ -169,9 +169,9 @@ class Form extends Component<Props, State> {
     const needsToValidate: string[] = [];
 
     for (const name in status) {
-      if (Status.INIT === status[name]) {
+      // if (Status.INIT === status[name]) {
         needsToValidate.push(name);
-      }
+      // }
     }
 
     if (!needsToValidate.length) {
@@ -185,6 +185,7 @@ class Form extends Component<Props, State> {
 
       for (const name of needsToValidate) {
         const control = this.state.controls.get(name) as Control;
+        control.markAsTouched();
         const errors = control.runValidation(this.getValue(name));
         const status = hasError(errors) ? Status.INVALID : Status.VALID;
 
